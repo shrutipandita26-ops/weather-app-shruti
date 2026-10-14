@@ -16,30 +16,30 @@ if(st.button("Fetch Weather")):
     response = requests.get(f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric")
     if(response.status_code == 200):
         st.success('Weather data fetched successfully')
-    print(response.json())
-    data = response.json()
-    print(data)
-
-    #Extract weather information
-    temperature = data['main']['temp']
-    humidity = data['main']['humidity']
-    wind_speed = data['wind']['speed']
-    weather_condition = data['weather'][0]['description']
-    name = data['name']
-    country = data['sys']['country']
-
-    st.subheader(f'{name}, {country}')
-
+        print(response.json())
+        data = response.json()
+        print(data)
     
+        #Extract weather information
+        temperature = data['main']['temp']
+        humidity = data['main']['humidity']
+        wind_speed = data['wind']['speed']
+        weather_condition = data['weather'][0]['description']
+        name = data['name']
+        country = data['sys']['country']
     
-    #Create 4 columns
-    col1, col2 = st.columns(2)
-    col3, col4 = st.columns(2)
-
-    col1.metric('Temperature ',f'🌡️{temperature}°C') 
-    col2.metric('Humidity',f'💦{humidity}%')
-    col3.metric('Wind speed',f'🌬️{wind_speed}m/s')
-    col4.metric('weather condition',f'🌦️{weather_condition}')
-
-else: 
-    st.error('City not found')
+        st.subheader(f'{name}, {country}')
+    
+        
+        
+        #Create 4 columns
+        col1, col2 = st.columns(2)
+        col3, col4 = st.columns(2)
+    
+        col1.metric('Temperature ',f'🌡️{temperature}°C') 
+        col2.metric('Humidity',f'💦{humidity}%')
+        col3.metric('Wind speed',f'🌬️{wind_speed}m/s')
+        col4.metric('weather condition',f'🌦️{weather_condition}')
+    
+    else: 
+        st.error('City not found')
